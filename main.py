@@ -13,7 +13,7 @@ ins = []
 
 @app.route('/api/go', methods=['GET'])
 def go():
-    for (cmd, dist) in ins:
+    for cmd,dist in ins:
         if cmd == 'forward':
             forward(dist)
         if cmd == 'right':
@@ -28,26 +28,26 @@ def go():
 @app.route('/api/left', methods=['GET'])
 def addleft():
     count = request.args.get('dist')
-    ins.append(('left', int(count)))
-    return Response(json.dumps(ins), mimetype='application/json')
-
-@app.route('/api/list', methods=['GET'])
-def list():
+    ins.append({'left': int(count)})
     return Response(json.dumps(ins), mimetype='application/json')
 
 @app.route('/api/right', methods=['GET'])
 def addright():
     count = request.args.get('dist')
-    ins.append(('right', int(count)))
+    ins.append({'right': int(count)})
     return Response(json.dumps(ins), mimetype='application/json')
 
 
 @app.route('/api/forward', methods=['GET'])
 def addforward():
     count = request.args.get('dist')
-    ins.append(('forward', int(count)))
+    ins.append({'forward': int(count)})
     return Response(json.dumps(ins), mimetype='application/json')
 
+
+@app.route('/api/list', methods=['GET'])
+def list():
+    return Response(json.dumps(ins), mimetype='application/json')
 
 @app.route('/api/clear', methods=['GET'])
 def clear():
