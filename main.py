@@ -7,19 +7,18 @@ from flask import Response
 from flask import request
 
 app = Flask(__name__)
-
 ins = []
-
 
 @app.route('/api/go', methods=['GET'])
 def go():
-    for cmd,dist in ins:
-        if cmd == 'forward':
-            forward(dist)
-        if cmd == 'right':
-            right(dist)
-        if cmd == 'left':
-            left(dist)
+    for i in ins:
+        cmd = i.items()[0]
+        if cmd[0] == 'forward':
+            forward(cmd[1])
+        if cmd[0] == 'right':
+            right(cmd[1])
+        if cmd[0] == 'left':
+            left(cmd[1])
 
     resp = json.dumps(ins)
     return Response(resp, mimetype='application/json')
