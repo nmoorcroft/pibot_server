@@ -13,6 +13,8 @@ ins = []
 def go():
     for i in ins:
         cmd = i.items()[0]
+        print cmd[0]
+        print cmd[1]
         if cmd[0] == 'forward':
             forward(cmd[1])
         if cmd[0] == 'right':
@@ -77,6 +79,7 @@ def left(count):
 
 
 def forward(count):
+    print 'forward called'
     GPIO.output(4, GPIO.HIGH)
     GPIO.output(7, GPIO.HIGH)
     time.sleep(count / 10)
